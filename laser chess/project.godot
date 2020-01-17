@@ -16,6 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Laser Chess"
+run/main_scene="res://chessboard.tscn"
 config/icon="res://icon.png"
 
 [rendering]
