@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/altmirrorfourtyfive.png-10b0d2bb7827fc5feaf4fa953c4e62c3.stex"
+path="res://.import/trimirror.png-21417b1f56adb8e006893e5c17c8a255.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://altmirrorfourtyfive.png"
-dest_files=[ "res://.import/altmirrorfourtyfive.png-10b0d2bb7827fc5feaf4fa953c4e62c3.stex" ]
+source_file="res://redpieces/trimirror.png"
+dest_files=[ "res://.import/trimirror.png-21417b1f56adb8e006893e5c17c8a255.stex" ]
 
 [params]
 

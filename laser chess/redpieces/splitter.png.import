@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mirrorfourtyfive.png-594aa22b5a3b35f0174b9d73ce0c24f0.stex"
+path="res://.import/splitter.png-ebaddf5714dbb1146dd495263736b925.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mirrorfourtyfive.png"
-dest_files=[ "res://.import/mirrorfourtyfive.png-594aa22b5a3b35f0174b9d73ce0c24f0.stex" ]
+source_file="res://redpieces/splitter.png"
+dest_files=[ "res://.import/splitter.png-ebaddf5714dbb1146dd495263736b925.stex" ]
 
 [params]
 
