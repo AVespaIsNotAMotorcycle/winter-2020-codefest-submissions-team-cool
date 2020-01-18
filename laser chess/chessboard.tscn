@@ -1,26 +1,20 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://chessboard.gd" type="Script" id=1]
 [ext_resource path="res://whitesquare.png" type="Texture" id=2]
 [ext_resource path="res://darksquare.png" type="Texture" id=3]
 [ext_resource path="res://lightsquare.png" type="Texture" id=4]
-[ext_resource path="res://redpieces/trimirror.png" type="Texture" id=5]
-[ext_resource path="res://bluepieces/alttrimirror.png" type="Texture" id=6]
-[ext_resource path="res://redpieces/hypercube.png" type="Texture" id=7]
-[ext_resource path="res://redpieces/block.png" type="Texture" id=8]
-[ext_resource path="res://bluepieces/altstraightmirror.png" type="Texture" id=9]
-[ext_resource path="res://bluepieces/altsplitter.png" type="Texture" id=10]
-[ext_resource path="res://bluepieces/althypercube.png" type="Texture" id=11]
-[ext_resource path="res://bluepieces/altblock.png" type="Texture" id=12]
-[ext_resource path="res://redpieces/cannon.png" type="Texture" id=13]
-[ext_resource path="res://bluepieces/altcannon.png" type="Texture" id=14]
-[ext_resource path="res://redpieces/king.png" type="Texture" id=15]
-[ext_resource path="res://bluepieces/altking.png" type="Texture" id=16]
-[ext_resource path="res://redpieces/diagmirror.png" type="Texture" id=17]
-[ext_resource path="res://bluepieces/altdiagmirror.png" type="Texture" id=18]
-[ext_resource path="res://redpieces/straightmirror.png" type="Texture" id=19]
-[ext_resource path="res://redpieces/splitter.png" type="Texture" id=20]
-[ext_resource path="res://boardPieces.gd" type="Script" id=21]
+[ext_resource path="res://redpieces/king.png" type="Texture" id=5]
+[ext_resource path="res://redpieces/cannon.png" type="Texture" id=6]
+[ext_resource path="res://redpieces/trimirror.png" type="Texture" id=7]
+[ext_resource path="res://redpieces/diagmirror.png" type="Texture" id=8]
+[ext_resource path="res://redpieces/block.png" type="Texture" id=9]
+[ext_resource path="res://bluepieces/altking.png" type="Texture" id=10]
+[ext_resource path="res://bluepieces/altcannon.png" type="Texture" id=11]
+[ext_resource path="res://bluepieces/alttrimirror.png" type="Texture" id=12]
+[ext_resource path="res://bluepieces/altdiagmirror.png" type="Texture" id=13]
+[ext_resource path="res://bluepieces/altblock.png" type="Texture" id=14]
+[ext_resource path="res://boardPieces.gd" type="Script" id=15]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
@@ -64,7 +58,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 2/z_index = 0
 
 [sub_resource type="TileSet" id=3]
-0/name = "mirrorfourtyfive.png 0"
+0/name = "king.png 0"
 0/texture = ExtResource( 5 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
@@ -74,7 +68,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shapes = [  ]
 0/z_index = 0
-1/name = "altmirrorfourtyfive.png 1"
+1/name = "cannon.png 1"
 1/texture = ExtResource( 6 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
@@ -84,8 +78,8 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 1/navigation_offset = Vector2( 0, 0 )
 1/shapes = [  ]
 1/z_index = 0
-2/name = "cannon.png 2"
-2/texture = ExtResource( 13 )
+2/name = "trimirror.png 2"
+2/texture = ExtResource( 7 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 0, 0, 64, 64 )
@@ -94,8 +88,8 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 2/navigation_offset = Vector2( 0, 0 )
 2/shapes = [  ]
 2/z_index = 0
-3/name = "altcannon.png 3"
-3/texture = ExtResource( 14 )
+3/name = "diagmirror.png 3"
+3/texture = ExtResource( 8 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 0, 0, 64, 64 )
@@ -104,8 +98,8 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 3/navigation_offset = Vector2( 0, 0 )
 3/shapes = [  ]
 3/z_index = 0
-4/name = "king.png 4"
-4/texture = ExtResource( 15 )
+4/name = "block.png 4"
+4/texture = ExtResource( 9 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 0, 0, 64, 64 )
@@ -115,7 +109,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 4/shapes = [  ]
 4/z_index = 0
 5/name = "altking.png 5"
-5/texture = ExtResource( 16 )
+5/texture = ExtResource( 10 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 0, 0, 64, 64 )
@@ -124,8 +118,8 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 5/navigation_offset = Vector2( 0, 0 )
 5/shapes = [  ]
 5/z_index = 0
-6/name = "diagmirror.png 6"
-6/texture = ExtResource( 17 )
+6/name = "altcannon.png 6"
+6/texture = ExtResource( 11 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
 6/region = Rect2( 0, 0, 64, 64 )
@@ -134,8 +128,8 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 6/navigation_offset = Vector2( 0, 0 )
 6/shapes = [  ]
 6/z_index = 0
-7/name = "altdiagmirror.png 7"
-7/texture = ExtResource( 18 )
+7/name = "alttrimirror.png 7"
+7/texture = ExtResource( 12 )
 7/tex_offset = Vector2( 0, 0 )
 7/modulate = Color( 1, 1, 1, 1 )
 7/region = Rect2( 0, 0, 64, 64 )
@@ -144,8 +138,8 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 7/navigation_offset = Vector2( 0, 0 )
 7/shapes = [  ]
 7/z_index = 0
-8/name = "straightmirror.png 8"
-8/texture = ExtResource( 19 )
+8/name = "altdiagmirror.png 8"
+8/texture = ExtResource( 13 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
 8/region = Rect2( 0, 0, 64, 64 )
@@ -154,8 +148,8 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 8/navigation_offset = Vector2( 0, 0 )
 8/shapes = [  ]
 8/z_index = 0
-9/name = "splitter.png 9"
-9/texture = ExtResource( 20 )
+9/name = "altblock.png 9"
+9/texture = ExtResource( 14 )
 9/tex_offset = Vector2( 0, 0 )
 9/modulate = Color( 1, 1, 1, 1 )
 9/region = Rect2( 0, 0, 64, 64 )
@@ -164,66 +158,6 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 9/navigation_offset = Vector2( 0, 0 )
 9/shapes = [  ]
 9/z_index = 0
-10/name = "hypercube.png 10"
-10/texture = ExtResource( 7 )
-10/tex_offset = Vector2( 0, 0 )
-10/modulate = Color( 1, 1, 1, 1 )
-10/region = Rect2( 0, 0, 64, 64 )
-10/tile_mode = 0
-10/occluder_offset = Vector2( 0, 0 )
-10/navigation_offset = Vector2( 0, 0 )
-10/shapes = [  ]
-10/z_index = 0
-11/name = "block.png 11"
-11/texture = ExtResource( 8 )
-11/tex_offset = Vector2( 0, 0 )
-11/modulate = Color( 1, 1, 1, 1 )
-11/region = Rect2( 0, 0, 64, 64 )
-11/tile_mode = 0
-11/occluder_offset = Vector2( 0, 0 )
-11/navigation_offset = Vector2( 0, 0 )
-11/shapes = [  ]
-11/z_index = 0
-12/name = "altstraightmirror.png 12"
-12/texture = ExtResource( 9 )
-12/tex_offset = Vector2( 0, 0 )
-12/modulate = Color( 1, 1, 1, 1 )
-12/region = Rect2( 0, 0, 64, 64 )
-12/tile_mode = 0
-12/occluder_offset = Vector2( 0, 0 )
-12/navigation_offset = Vector2( 0, 0 )
-12/shapes = [  ]
-12/z_index = 0
-13/name = "altsplitter.png 13"
-13/texture = ExtResource( 10 )
-13/tex_offset = Vector2( 0, 0 )
-13/modulate = Color( 1, 1, 1, 1 )
-13/region = Rect2( 0, 0, 64, 64 )
-13/tile_mode = 0
-13/occluder_offset = Vector2( 0, 0 )
-13/navigation_offset = Vector2( 0, 0 )
-13/shapes = [  ]
-13/z_index = 0
-14/name = "althypercube.png 14"
-14/texture = ExtResource( 11 )
-14/tex_offset = Vector2( 0, 0 )
-14/modulate = Color( 1, 1, 1, 1 )
-14/region = Rect2( 0, 0, 64, 64 )
-14/tile_mode = 0
-14/occluder_offset = Vector2( 0, 0 )
-14/navigation_offset = Vector2( 0, 0 )
-14/shapes = [  ]
-14/z_index = 0
-15/name = "altblock.png 15"
-15/texture = ExtResource( 12 )
-15/tex_offset = Vector2( 0, 0 )
-15/modulate = Color( 1, 1, 1, 1 )
-15/region = Rect2( 0, 0, 64, 64 )
-15/tile_mode = 0
-15/occluder_offset = Vector2( 0, 0 )
-15/navigation_offset = Vector2( 0, 0 )
-15/shapes = [  ]
-15/z_index = 0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -236,5 +170,5 @@ tile_data = PoolIntArray( 0, 536870914, 0, 1, 1, 0, 2, 0, 0, 3, 1, 0, 4, 0, 0, 5
 [node name="boardPieces" type="TileMap" parent="."]
 tile_set = SubResource( 3 )
 format = 1
-tile_data = PoolIntArray( 0, 1610612738, 0, 4, 1610612747, 0, 5, 4, 0, 6, 1610612747, 0, 7, 1610612736, 0, 13, 15, 0, 15, 3, 0, 17, 7, 0, 19, 14, 0, 21, 5, 0, 23, 1, 0, 25, 13, 0, 27, 12, 0, 65538, 1073741824, 0, 65549, -1073741809, 0, 65551, -1073741821, 0, 65559, -1073741823, 0, 65561, -1073741811, 0, 131075, -2147483647, 0, 131085, 1610612751, 0, 131087, 1610612739, 0, 131089, -1610612729, 0, 131095, 1610612737, 0, 131097, 1610612749, 0, 131099, -1610612724, 0, 196608, 536870912, 0, 196610, 1073741825, 0, 196612, 536870918, 0, 196613, 6, 0, 196615, 1610612736, 0, 196617, 1, 0, 196621, -1610612721, 0, 196623, -1610612733, 0, 196631, -1610612735, 0, 196633, -1610612723, 0, 262144, -536870912, 0, 262146, -2147483647, 0, 262148, 7, 0, 262149, 536870919, 0, 262151, -1610612736, 0, 262153, -1073741823, 0, 327686, 1610612736, 0, 327693, 11, 0, 327695, 2, 0, 327697, 6, 0, 327699, -1073741814, 0, 327701, 4, 0, 327703, 0, 0, 327705, 9, 0, 327707, 8, 0, 393223, -1610612735, 0, 393229, -1073741813, 0, 393231, -1073741822, 0, 393239, -1073741824, 0, 393241, -1073741815, 0, 458754, -2147483647, 0, 458755, 536870927, 0, 458756, 5, 0, 458757, 536870927, 0, 458761, 536870915, 0, 458765, 1610612747, 0, 458767, 2, 0, 458769, -1073741818, 0, 458775, 1610612736, 0, 458777, 1610612745, 0, 458779, -1073741816, 0, 524301, -1610612725, 0, 524303, -1610612734, 0, 524311, -1610612736, 0, 524313, -1610612727, 0 )
-script = ExtResource( 21 )
+tile_data = PoolIntArray( 0, 1610612742, 0, 3, 1073741833, 0, 4, 5, 0, 5, 1073741833, 0, 6, 1610612743, 0, 196608, 536870919, 0, 196612, 536870920, 0, 196613, 8, 0, 196617, -2147483646, 0, 262144, -536870905, 0, 262148, 3, 0, 262149, -1073741821, 0, 262153, 1073741826, 0, 458755, 2, 0, 458756, 4, 0, 458757, 0, 0, 458758, 4, 0, 458761, 536870913, 0 )
+script = ExtResource( 15 )
