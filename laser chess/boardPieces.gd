@@ -17,7 +17,6 @@ func _process(delta):
 	
 func _input(event):
 	mouse_pos = get_global_mouse_position()
-	#print(event.as_text())
 	
 	#this event will handle selecting a square for movement or rotation
 	if event is InputEventMouseButton and event.pressed: #when a square is clicked
@@ -26,11 +25,11 @@ func _input(event):
 			clicked_tile = world_to_map(mouse_pos) #then select the clicked square
 			if get_cellv(clicked_tile) == -1: #if the clicked square is empty
 				clicked_tile = DESELECT #don't select it
-				print(clicked_tile)
 			else:
 				selected_piece = get_cellv(clicked_tile)
 				print(selected_piece)
-		
+				print(analyze_orientation(clicked_tile.x,clicked_tile.y))
+				
 		else: #if a square is already selected
 			var new_tile = world_to_map(mouse_pos)
 			var dist = vdistance(clicked_tile, new_tile)
@@ -72,6 +71,17 @@ func analyze_orientation(x,y):
 		return 0
 
 func rotate_cell(cell, deg):
+	if get_cellv(cell) == 1: #red cannon
+		if analyze_orientation(cell.x,cell.y) == 0:
+			deg = 270
+		elif analyze_orientation(cell.x,cell.y) == 270:
+			deg = 90
+	if get_cellv(cell) == 6: #blue cannon
+		if analyze_orientation(cell.x,cell.y) == 90:
+			deg = 90
+		elif analyze_orientation(cell.y,cell.y) == 180:
+			deg = 270
+	
 	var targ = (analyze_orientation(cell.x,cell.y) + deg) % 360
 	if targ == 0:
 		set_cellv(cell, get_cellv(cell), false, false, false)
