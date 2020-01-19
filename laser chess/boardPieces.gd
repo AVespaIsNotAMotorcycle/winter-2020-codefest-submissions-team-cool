@@ -9,7 +9,7 @@ var active_player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_cell(0,0,-1)
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -32,5 +32,35 @@ func _input(event):
 				print(selected_piece)
 		
 		else: #if a square is already selected
-			clicked_tile = DESELECT #deselect it
-			print(clicked_tile)
+			var new_tile = world_to_map(mouse_pos)
+			var dist = vdistance(clicked_tile, new_tile)
+			if dist.x > 1 || dist.y > 1:
+				clicked_tile = DESELECT #deselect it
+			elif dist == Vector2(0,0):
+				clicked_tile = DESELECT
+			else:
+				move(clicked_tile, new_tile)
+				clicked_tile = DESELECT
+				
+	if event is InputEventKey and event.pressed and clicked_tile != Vector2(-1,-1):
+		if event.scancode == KEY_RIGHT:
+			rotate_right(clicked_tile)
+			clicked_tile = DESELECT
+		if event.scancode == KEY_LEFT:
+			rotate_left(clicked_tile)
+			clicked_tile = DESELECT
+		print(clicked_tile)
+	
+func move(start, end):
+	var id = get_cellv(start)
+	set_cellv(start,-1)
+	set_cellv(end,id)
+
+func rotate_left(cell):
+	set_cellv(cell, get_cellv(cell), true, false, true)
+	
+func rotate_right(cell):
+	set_cellv(cell, get_cellv(cell), false, true, true)
+
+func vdistance(start, end):
+	return Vector2(abs(end.x-start.x),abs(end.y-start.y))
