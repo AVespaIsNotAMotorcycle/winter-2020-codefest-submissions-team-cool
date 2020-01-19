@@ -44,23 +44,37 @@ func _input(event):
 				
 	if event is InputEventKey and event.pressed and clicked_tile != Vector2(-1,-1):
 		if event.scancode == KEY_RIGHT:
-			rotate_right(clicked_tile)
+			rotate_cell(clicked_tile, 90)
 			clicked_tile = DESELECT
 		if event.scancode == KEY_LEFT:
-			rotate_left(clicked_tile)
+			rotate_cell(clicked_tile,270)
 			clicked_tile = DESELECT
-		print(clicked_tile)
 	
 func move(start, end):
 	var id = get_cellv(start)
 	set_cellv(start,-1)
 	set_cellv(end,id)
 
-func rotate_left(cell):
-	set_cellv(cell, get_cellv(cell), true, false, true)
-	
-func rotate_right(cell):
-	set_cellv(cell, get_cellv(cell), false, true, true)
+func analyze_orientation(x,y):
+	if is_cell_transposed(x,y) and is_cell_x_flipped(x,y):
+		return 90
+	elif is_cell_transposed(x,y) and is_cell_y_flipped(x,y):
+		return 270
+	elif is_cell_x_flipped(x,y) and is_cell_y_flipped(x,y):
+		return 180
+	else:
+		return 0
+
+func rotate_cell(cell, deg):
+	var targ = (analyze_orientation(cell.x,cell.y) + deg) % 360
+	if targ == 0:
+		set_cellv(cell, get_cellv(cell), false, false, false)
+	if targ == 90:
+		set_cellv(cell, get_cellv(cell), true, false, true)
+	if targ == 180:
+		set_cellv(cell, get_cellv(cell), true, true, false)
+	if targ == 270:
+		set_cellv(cell, get_cellv(cell), false, true, true)
 
 func vdistance(start, end):
 	return Vector2(abs(end.x-start.x),abs(end.y-start.y))
