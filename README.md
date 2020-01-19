@@ -3,9 +3,9 @@
 # Team Info
 ### Team name:
 ### Team members (format: GitHub username, last name, first name):
-- Jack Murphy 
-- Sam Ebersole
-- Boaz Kaufman 
+- Cruse, Jack
+- AVespaIsNotAMotorcycle, Ebersole, Sam
+- Ernulphus, Kaufman, Boaz 
 
 ### Group info (check all that apply - add an X in the [ ])
 - [ ] We are a CUNY2X bootcamp cohort team
