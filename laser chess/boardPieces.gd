@@ -9,14 +9,11 @@ var active_player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_cell(10,0,3, false, false, false)
-	set_cell(11,0,3, true, false, true)
-	set_cell(12,0,3, false, true, true)
-	set_cell(13,0,3, true, true, false)
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	pass #signal to make that tile green
 	
 func _input(event):
 	mouse_pos = get_global_mouse_position()
@@ -45,6 +42,7 @@ func _input(event):
 				move(clicked_tile, new_tile)
 				clicked_tile = DESELECT
 				
+	#rotate a selected piece by 
 	if event is InputEventKey and event.pressed and clicked_tile != Vector2(-1,-1):
 		if event.scancode == KEY_RIGHT:
 			rotate_cell(clicked_tile, 90)
@@ -55,10 +53,13 @@ func _input(event):
 	
 func move(start, end):
 	var id = get_cellv(start)
-	var state = analyze_orientation(start.x,start.y)
-	set_cellv(start,-1)
-	set_cellv(end,id)
-	rotate_cell(end,state)
+	if id % 5 == 1:
+		clicked_tile = DESELECT
+	else:
+		var state = analyze_orientation(start.x,start.y)
+		set_cellv(start,-1)
+		set_cellv(end,id)
+		rotate_cell(end,state)
 
 func analyze_orientation(x,y):
 	if is_cell_transposed(x,y) and is_cell_x_flipped(x,y):
