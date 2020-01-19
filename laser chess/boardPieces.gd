@@ -52,8 +52,10 @@ func _input(event):
 	
 func move(start, end):
 	var id = get_cellv(start)
+	var state = analyze_orientation(start.x,start.y)
 	set_cellv(start,-1)
 	set_cellv(end,id)
+	rotate_cell(end,state)
 
 func analyze_orientation(x,y):
 	if is_cell_transposed(x,y) and is_cell_x_flipped(x,y):
