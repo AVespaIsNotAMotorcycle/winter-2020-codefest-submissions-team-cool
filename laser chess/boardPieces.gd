@@ -9,7 +9,10 @@ var active_player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	set_cell(10,0,3, false, false, false)
+	set_cell(11,0,3, true, false, true)
+	set_cell(12,0,3, false, true, true)
+	set_cell(13,0,3, true, true, false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
