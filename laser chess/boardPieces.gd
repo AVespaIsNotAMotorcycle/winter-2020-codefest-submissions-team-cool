@@ -5,6 +5,7 @@ const DESELECT = Vector2(-1,-1)
 var clicked_tile = DESELECT #vector2 location of the clicked tile
 var selected_piece #ID in the tileset of the selected piece
 var active_player
+var turn_pred = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -23,8 +24,11 @@ func _input(event):
 		#if there isn't a square selected
 		if (clicked_tile == DESELECT):
 			clicked_tile = world_to_map(mouse_pos) #then select the clicked square
-			if get_cellv(clicked_tile) == -1: #if the clicked square is empty
+			var id = get_cellv(clicked_tile)
+			if id == -1: #if the clicked square is empty
 				clicked_tile = DESELECT #don't select it
+			elif (turn_pred && (id-5 >= 0)) || (!turn_pred && (id-5 < 0)): #if the selected piece isn't yours
+				clicked_tile = DESELECT#don't select it
 			else:
 				selected_piece = get_cellv(clicked_tile)
 				print(selected_piece)
@@ -40,16 +44,26 @@ func _input(event):
 			else:
 				move(clicked_tile, new_tile)
 				clicked_tile = DESELECT
+				turn_pred = !turn_pred
+				fire_cannon()
 				
 	#rotate a selected piece by 
 	if event is InputEventKey and event.pressed and clicked_tile != Vector2(-1,-1):
 		if event.scancode == KEY_RIGHT:
 			rotate_cell(clicked_tile, 90)
 			clicked_tile = DESELECT
+			turn_pred = !turn_pred
+			fire_cannon()
 		if event.scancode == KEY_LEFT:
 			rotate_cell(clicked_tile,270)
 			clicked_tile = DESELECT
+			turn_pred = !turn_pred
+			fire_cannon()
 	
+	
+func fire_cannon():
+	pass
+
 func move(start, end):
 	var id = get_cellv(start)
 	if id % 5 == 1:
