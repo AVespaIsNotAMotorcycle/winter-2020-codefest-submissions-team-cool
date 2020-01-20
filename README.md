@@ -3,7 +3,7 @@
 # Team Info
 ### Team name:
 ### Team members (format: GitHub username, last name, first name):
-- Cruse, Jack
+- Cruse-Mulhall, Jack
 - AVespaIsNotAMotorcycle, Ebersole, Sam
 - Ernulphus, Kaufman, Boaz 
 
