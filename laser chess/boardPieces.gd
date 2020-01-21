@@ -64,19 +64,66 @@ func _input(event):
 	
 	
 func fire_cannon():
-	pass
-	"""
+	if (turn_pred && get_cellv(9,7) == -1) || (!turn_pred && get_cellv(0,0) == -1):
+		return
+		
 	var direction
-	var start = Vector2(0,0)
-	var next_tile = Vector2(0,0)
+	var tile = Vector2(0,0)
 	if turn_pred:
 		direction = analyze_orientation(9,7)
-		start = Vector2(9,7)
+		tile = Vector2(9,7)
 		#as long as the laser remains in bounds:
-		while (next_tile.x > -1 && next_tile.x < 10 && next_tile.y > -1 && next_tile.y < 8):
+		while (tile.x > -1 && tile.x < 10 && tile.y > -1 && tile.y < 8):
 			#check each next_tile and update direction. If it's a hit, destroy and return
+			var id = get_cellv(tile)
+			
+			#logic for king
+			if id % 5 == 0:
+				end_game()
+			
+			#logic for cannon
+			if id % 5 == 1:
+				set_cellv(tile, -1)
+			
+			
+			#logic for triangular mirror
+			if id % 5 == 2:
+				pass
+			
+			#logic for diagonal mirror
+			if id % 5 == 3:
+				if analyze_orientation(tile) == 0 || analyze_orientation(tile) == 180:
+					if direction == 0:
+						direction = 90
+					if direction == 90:
+						direction = 0
+					if direction == 180:
+						direction = 270
+					if direction == 270:
+						direction == 180
+				else:
+					if direction == 0:
+						direction = 279
+					if direction == 270:
+						direction = 0
+					if direction == 180:
+						direction = 90
+					if direction == 90:
+						direction == 180
+			
+			#logic for block
+			if id % 5 == 4:
+				pass
+			
+			#if nothing was destroyed, move laser
 			if direction == 0:
-				next_tile = Vector2(start.x, start.y - 1)
+				tile = Vector2(tile.x, tile.y - 1)
+			if direction == 90:
+				tile = Vector2(tile.x + 1, tile.y)
+			if direction == 180:
+				tile = Vector2(tile.x, tile.y + 1)
+			if direction == 270:
+				tile = Vector2(tile.x - 1, tile.y)
 			
 		
 		
