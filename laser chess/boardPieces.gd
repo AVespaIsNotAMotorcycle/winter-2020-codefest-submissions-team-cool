@@ -27,7 +27,7 @@ func _input(event):
 			var id = get_cellv(clicked_tile)
 			if id == -1: #if the clicked square is empty
 				clicked_tile = DESELECT #don't select it
-			elif (turn_pred && (id-5 >= 0)) || (!turn_pred && (id-5 < 0)): #if the selected piece isn't yours
+			elif (turn_pred && (id >= 5)) || (!turn_pred && (id < 5)): #if the selected piece isn't yours
 				clicked_tile = DESELECT#don't select it
 			else:
 				selected_piece = get_cellv(clicked_tile)
@@ -63,16 +63,37 @@ func _input(event):
 	
 	
 func fire_cannon():
+	var direction
+	var next_tile
 	if turn_pred:
-		var red = Vector2(9,7)
+		direction = analyze_orientation(9,7)
+		#as long as the laser remains in bounds:
+		while (next_tile.x > -1 && next_tile.x < 10 && next_tile.y > -1 && next_tile.y < 8):
+			pass #check each next_tile and update direction. If it's a hit, destroy and return
+		
 		
 	else:
-		var blue = Vector2(0,0)
+		direction = analyze_orientation(0,0)
+		while (next_tile.x > -1 && next_tile.x < 10 && next_tile.y > -1 && next_tile.y < 8):
+			pass #check each next_tile and update direction. If it's a hit, destroy and return
+
+func end_game():
+	print("Game over!")
 
 func move(start, end):
 	var id = get_cellv(start)
+	var id2 = get_cellv(end)
 	if id % 5 == 1:
 		clicked_tile = DESELECT
+	if id2 % 5 == 0:
+		end_game()
+		
+	if turn_pred && (id2 < 5 && id2 != -1):
+		clicked_tile = DESELECT
+		turn_pred = !turn_pred
+	elif !turn_pred && (id2 > 4):
+		clicked_tile = DESELECT
+		turn_pred = !turn_pred
 	else:
 		var state = analyze_orientation(start.x,start.y)
 		set_cellv(start,-1)
