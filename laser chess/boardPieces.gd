@@ -4,7 +4,6 @@ var mouse_pos
 const DESELECT = Vector2(-1,-1)
 var clicked_tile = DESELECT #vector2 location of the clicked tile
 var selected_piece #ID in the tileset of the selected piece
-var active_player
 var turn_pred = true
 
 
@@ -31,9 +30,11 @@ func _input(event):
 				clicked_tile = DESELECT#don't select it
 			else:
 				selected_piece = get_cellv(clicked_tile)
+				"""
 				print(clicked_tile)
 				print(selected_piece)
 				print(analyze_orientation(clicked_tile.x,clicked_tile.y))
+				"""
 				
 		else: #if a square is already selected
 			var new_tile = world_to_map(mouse_pos)
@@ -45,26 +46,29 @@ func _input(event):
 			else:
 				move(clicked_tile, new_tile)
 				clicked_tile = DESELECT
-				turn_pred = !turn_pred
 				fire_cannon()
+				turn_pred = !turn_pred
+
 				
 	#rotate a selected piece by 
 	if event is InputEventKey and event.pressed and clicked_tile != Vector2(-1,-1):
 		if event.scancode == KEY_RIGHT:
 			rotate_cell(clicked_tile, 90)
 			clicked_tile = DESELECT
-			turn_pred = !turn_pred
 			fire_cannon()
+			turn_pred = !turn_pred
+
 		if event.scancode == KEY_LEFT:
 			rotate_cell(clicked_tile,270)
 			clicked_tile = DESELECT
-			turn_pred = !turn_pred
 			fire_cannon()
+			turn_pred = !turn_pred
+
 	
 	
 	
 func fire_cannon():
-	if (turn_pred && get_cellv(9,7) == -1) || (!turn_pred && get_cellv(0,0) == -1):
+	if (turn_pred && get_cell(9,7) == -1) || (!turn_pred && get_cell(0,0) == -1):
 		return
 		
 	var direction
@@ -72,67 +76,118 @@ func fire_cannon():
 	if turn_pred:
 		direction = analyze_orientation(9,7)
 		tile = Vector2(9,7)
-		#as long as the laser remains in bounds:
-		while (tile.x > -1 && tile.x < 10 && tile.y > -1 && tile.y < 8):
-			#check each next_tile and update direction. If it's a hit, destroy and return
-			var id = get_cellv(tile)
-			
-			#logic for king
-			if id % 5 == 0:
-				end_game()
-			
-			#logic for cannon
-			if id % 5 == 1:
-				set_cellv(tile, -1)
-			
-			
-			#logic for triangular mirror
-			if id % 5 == 2:
-				pass
-			
-			#logic for diagonal mirror
-			if id % 5 == 3:
-				if analyze_orientation(tile) == 0 || analyze_orientation(tile) == 180:
-					if direction == 0:
-						direction = 90
-					if direction == 90:
-						direction = 0
-					if direction == 180:
-						direction = 270
-					if direction == 270:
-						direction == 180
-				else:
-					if direction == 0:
-						direction = 279
-					if direction == 270:
-						direction = 0
-					if direction == 180:
-						direction = 90
-					if direction == 90:
-						direction == 180
-			
-			#logic for block
-			if id % 5 == 4:
-				pass
-			
-			#if nothing was destroyed, move laser
-			if direction == 0:
-				tile = Vector2(tile.x, tile.y - 1)
-			if direction == 90:
-				tile = Vector2(tile.x + 1, tile.y)
-			if direction == 180:
-				tile = Vector2(tile.x, tile.y + 1)
-			if direction == 270:
-				tile = Vector2(tile.x - 1, tile.y)
-			
-		
 		
 	else:
 		direction = analyze_orientation(0,0)
-		#while (next_tile.x > -1 && next_tile.x < 10 && next_tile.y > -1 && next_tile.y < 8):
-		#	pass #check each next_tile and update direction. If it's a hit, destroy and return
-"""
+		tile = Vector2(0,0)
 
+	if direction == 0:
+		tile = Vector2(tile.x, tile.y - 1)
+	if direction == 90:
+		tile = Vector2(tile.x + 1, tile.y)
+	if direction == 180:
+		tile = Vector2(tile.x, tile.y + 1)
+	if direction == 270:
+		tile = Vector2(tile.x - 1, tile.y)
+		
+	#as long as the laser remains in bounds:
+	while (tile.x > -1 && tile.x < 10 && tile.y > -1 && tile.y < 8):
+		#check each next_tile and update direction. If it's a hit, destroy and return
+		var id = get_cellv(tile)
+		
+		print(tile)
+		print(id)
+		print(direction)
+		
+		#logic for king
+		if id % 5 == 0:
+			set_cellv(tile,-1)
+			end_game()
+			break
+		
+		#logic for hitting cannon
+		if id % 5 == 1:
+			set_cellv(tile, -1)
+			break
+		
+		#logic for hitting triangular mirror
+		if id % 5 == 2:
+			if analyze_orientation(tile.x,tile.y)  == 0:
+				if direction == 0 || direction == 270:
+					set_cellv(tile, -1)
+					break
+				if direction == 90:
+					direction = 0
+				if direction == 180:
+					direction = 270
+			
+			if analyze_orientation(tile.x,tile.y)  == 90:
+				if direction == 0 || direction == 90:
+					set_cellv(tile, -1)
+					break
+				if direction == 180:
+					direction = 90
+				if direction == 270:
+					direction = 0
+				
+			if analyze_orientation(tile.x,tile.y)  == 180:
+				if direction == 90 || direction == 180:
+					set_cellv(tile, -1)
+					break
+				if direction == 0:
+					direction = 90
+				if direction == 270:
+					direction = 180
+				
+			if analyze_orientation(tile.x,tile.y)  == 270:
+				if direction == 180 || direction == 270:
+					set_cellv(tile, -1)
+					break
+				if direction == 0:
+					direction = 270
+				if direction == 90:
+					direction = 180
+		
+		#logic for hitting diagonal mirror
+		if id % 5 == 3:
+			if analyze_orientation(tile.x,tile.y) == 0 || analyze_orientation(tile.x,tile.y) == 180:
+				if direction == 0:
+					direction = 90
+				if direction == 90:
+					direction = 0
+				if direction == 180:
+					direction = 270
+				if direction == 270:
+					direction = 180
+			else:
+				if direction == 0:
+					direction = 279
+				if direction == 270:
+					direction = 0
+				if direction == 180:
+					direction = 90
+				if direction == 90:
+					direction = 180
+		
+		#logic for hitting block
+		if id % 5 == 4:
+			if direction == (analyze_orientation(tile.x,tile.y) + 180) % 360:
+				return #do nothing if the block blocks the laser
+			else:
+				set_cellv(tile, -1) #if it hits any other side, destroy the block
+				return
+		
+		#if nothing was destroyed, move laser to next tile
+		if direction == 0:
+			tile = Vector2(tile.x, tile.y - 1)
+		if direction == 90:
+			tile = Vector2(tile.x + 1, tile.y)
+		if direction == 180:
+			tile = Vector2(tile.x, tile.y + 1)
+		if direction == 270:
+			tile = Vector2(tile.x - 1, tile.y)
+		
+	
 func end_game():
 	print("Game over!")
 
