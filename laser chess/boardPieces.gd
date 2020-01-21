@@ -62,20 +62,29 @@ func _input(event):
 			fire_cannon()
 	
 	
+	
 func fire_cannon():
+	pass
+	"""
 	var direction
-	var next_tile
+	var start = Vector2(0,0)
+	var next_tile = Vector2(0,0)
 	if turn_pred:
 		direction = analyze_orientation(9,7)
+		start = Vector2(9,7)
 		#as long as the laser remains in bounds:
 		while (next_tile.x > -1 && next_tile.x < 10 && next_tile.y > -1 && next_tile.y < 8):
-			pass #check each next_tile and update direction. If it's a hit, destroy and return
+			#check each next_tile and update direction. If it's a hit, destroy and return
+			if direction == 0:
+				next_tile = Vector2(start.x, start.y - 1)
+			
 		
 		
 	else:
 		direction = analyze_orientation(0,0)
-		while (next_tile.x > -1 && next_tile.x < 10 && next_tile.y > -1 && next_tile.y < 8):
-			pass #check each next_tile and update direction. If it's a hit, destroy and return
+		#while (next_tile.x > -1 && next_tile.x < 10 && next_tile.y > -1 && next_tile.y < 8):
+		#	pass #check each next_tile and update direction. If it's a hit, destroy and return
+"""
 
 func end_game():
 	print("Game over!")
@@ -88,12 +97,19 @@ func move(start, end):
 	if id2 % 5 == 0:
 		end_game()
 		
+	"""
+	// these statements allowed for some pieces to take others like in classic chess
 	if turn_pred && (id2 < 5 && id2 != -1):
 		clicked_tile = DESELECT
 		turn_pred = !turn_pred
 	elif !turn_pred && (id2 > 4):
 		clicked_tile = DESELECT
 		turn_pred = !turn_pred
+	"""
+	if id2 != -1:
+		clicked_tile = DESELECT
+		turn_pred = !turn_pred
+	
 	else:
 		var state = analyze_orientation(start.x,start.y)
 		set_cellv(start,-1)
