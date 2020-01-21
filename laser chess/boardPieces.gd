@@ -30,11 +30,6 @@ func _input(event):
 				clicked_tile = DESELECT#don't select it
 			else:
 				selected_piece = get_cellv(clicked_tile)
-				"""
-				print(clicked_tile)
-				print(selected_piece)
-				print(analyze_orientation(clicked_tile.x,clicked_tile.y))
-				"""
 				
 		else: #if a square is already selected
 			var new_tile = world_to_map(mouse_pos)
@@ -50,7 +45,7 @@ func _input(event):
 				turn_pred = !turn_pred
 
 				
-	#rotate a selected piece by 
+	#rotate a selected piece by hitting left and right
 	if event is InputEventKey and event.pressed and clicked_tile != Vector2(-1,-1):
 		if event.scancode == KEY_RIGHT:
 			rotate_cell(clicked_tile, 90)
@@ -64,13 +59,8 @@ func _input(event):
 			fire_cannon()
 			turn_pred = !turn_pred
 
-	
-	
-	
+
 func fire_cannon():
-	if (turn_pred && get_cell(9,7) == -1) || (!turn_pred && get_cell(0,0) == -1):
-		return
-		
 	var direction
 	var tile = Vector2(0,0)
 	if turn_pred:
@@ -95,10 +85,6 @@ func fire_cannon():
 		#check each next_tile and update direction. If it's a hit, destroy and return
 		var id = get_cellv(tile)
 		
-		print(tile)
-		print(id)
-		print(direction)
-		
 		#logic for king
 		if id % 5 == 0:
 			set_cellv(tile,-1)
@@ -107,7 +93,6 @@ func fire_cannon():
 		
 		#logic for hitting cannon
 		if id % 5 == 1:
-			set_cellv(tile, -1)
 			break
 		
 		#logic for hitting triangular mirror
@@ -186,34 +171,37 @@ func fire_cannon():
 			tile = Vector2(tile.x, tile.y + 1)
 		if direction == 270:
 			tile = Vector2(tile.x - 1, tile.y)
-		
-	
+
 func end_game():
 	print("Game over!")
 
 func move(start, end):
 	var id = get_cellv(start)
 	var id2 = get_cellv(end)
-	if id % 5 == 1:
-		clicked_tile = DESELECT
-	if id2 % 5 == 0:
-		end_game()
-		
-	"""
-	// these statements allowed for some pieces to take others like in classic chess
-	if turn_pred && (id2 < 5 && id2 != -1):
-		clicked_tile = DESELECT
-		turn_pred = !turn_pred
-	elif !turn_pred && (id2 > 4):
-		clicked_tile = DESELECT
-		turn_pred = !turn_pred
-	"""
-	if id2 != -1:
+	var state = analyze_orientation(start.x,start.y)
+	var state2 = analyze_orientation(end.x,end.y)
+	var squares = get_node("../boardSquares")
+	
+	#no moving onto forbidden squares
+	if (squares.get_cellv(end) == 4 && id > 4) || (squares.get_cellv(end) == 5 && id < 5):
 		clicked_tile = DESELECT
 		turn_pred = !turn_pred
 	
+	elif id % 5 == 1: #no moving cannons
+		clicked_tile = DESELECT
+		turn_pred = !turn_pred
+		
+	elif id % 5 == 3 && (id2 % 5 == 2 || id2 % 5 == 4):
+		set_cellv(start, id2)
+		set_cellv(end, id)
+		rotate_cell(start, state2)
+		rotate_cell(end,state)
+	
+	elif id2 != -1:
+		clicked_tile = DESELECT
+		turn_pred = !turn_pred
+
 	else:
-		var state = analyze_orientation(start.x,start.y)
 		set_cellv(start,-1)
 		set_cellv(end,id)
 		rotate_cell(end,state)
