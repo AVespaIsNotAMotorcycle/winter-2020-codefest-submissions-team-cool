@@ -31,6 +31,7 @@ func _input(event):
 				clicked_tile = DESELECT#don't select it
 			else:
 				selected_piece = get_cellv(clicked_tile)
+				print(clicked_tile)
 				print(selected_piece)
 				print(analyze_orientation(clicked_tile.x,clicked_tile.y))
 				
@@ -62,7 +63,11 @@ func _input(event):
 	
 	
 func fire_cannon():
-	pass
+	if turn_pred:
+		var red = Vector2(9,7)
+		
+	else:
+		var blue = Vector2(0,0)
 
 func move(start, end):
 	var id = get_cellv(start)
