@@ -85,14 +85,27 @@ func fire_cannon():
 		#check each next_tile and update direction. If it's a hit, destroy and return
 		var id = get_cellv(tile)
 		
+		#show the laser as it moves
+		var select = get_node("../selectedsquares")
+		select.set_cellv(tile, 0)
+		var t = Timer.new()
+		t.set_wait_time(0.125)
+		t.set_one_shot(true)
+		self.add_child(t)
+		t.start()
+		yield(t, "timeout")
+		t.queue_free()
+		
 		#logic for king
 		if id % 5 == 0:
 			set_cellv(tile,-1)
+			select.set_cellv(tile,-1)
 			end_game()
 			break
 		
 		#logic for hitting cannon
 		if id % 5 == 1:
+			select.set_cellv(tile,-1)
 			break
 		
 		#logic for hitting triangular mirror
@@ -100,6 +113,7 @@ func fire_cannon():
 			if analyze_orientation(tile.x,tile.y)  == 0:
 				if direction == 0 || direction == 270:
 					set_cellv(tile, -1)
+					select.set_cellv(tile,-1)
 					break
 				if direction == 90:
 					direction = 0
@@ -109,6 +123,7 @@ func fire_cannon():
 			if analyze_orientation(tile.x,tile.y)  == 90:
 				if direction == 0 || direction == 90:
 					set_cellv(tile, -1)
+					select.set_cellv(tile,-1)
 					break
 				if direction == 180:
 					direction = 90
@@ -118,6 +133,7 @@ func fire_cannon():
 			if analyze_orientation(tile.x,tile.y)  == 180:
 				if direction == 90 || direction == 180:
 					set_cellv(tile, -1)
+					select.set_cellv(tile,-1)
 					break
 				if direction == 0:
 					direction = 90
@@ -127,6 +143,7 @@ func fire_cannon():
 			if analyze_orientation(tile.x,tile.y)  == 270:
 				if direction == 180 || direction == 270:
 					set_cellv(tile, -1)
+					select.set_cellv(tile,-1)
 					break
 				if direction == 0:
 					direction = 270
@@ -134,35 +151,46 @@ func fire_cannon():
 					direction = 180
 		
 		#logic for hitting diagonal mirror
+		#
+		#BUG: When two diagonal mirrors are adjdacent, the beam will go right through them
+		#
 		if id % 5 == 3:
 			if analyze_orientation(tile.x,tile.y) == 0 || analyze_orientation(tile.x,tile.y) == 180:
 				if direction == 0:
 					direction = 90
-				if direction == 90:
+				elif direction == 90:
 					direction = 0
-				if direction == 180:
+				elif direction == 180:
 					direction = 270
-				if direction == 270:
+				elif direction == 270:
 					direction = 180
 			else:
 				if direction == 0:
-					direction = 279
-				if direction == 270:
+					direction = 270
+				elif direction == 270:
 					direction = 0
-				if direction == 180:
+				elif direction == 180:
 					direction = 90
-				if direction == 90:
+				elif direction == 90:
 					direction = 180
 		
 		#logic for hitting block
 		if id % 5 == 4:
 			if direction == (analyze_orientation(tile.x,tile.y) + 180) % 360:
-				return #do nothing if the block blocks the laser
+				select.set_cellv(tile,-1)
+				break #do nothing if the block blocks the laser
 			else:
 				set_cellv(tile, -1) #if it hits any other side, destroy the block
-				return
+				select.set_cellv(tile,-1)
+				break
 		
 		#if nothing was destroyed, move laser to next tile
+		select.set_cellv(tile,-1)
+		
+		print(tile)
+		print(direction)
+		
+		
 		if direction == 0:
 			tile = Vector2(tile.x, tile.y - 1)
 		if direction == 90:
