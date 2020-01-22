@@ -41,7 +41,6 @@ func _input(event):
 			else:
 				move(clicked_tile, new_tile)
 				clicked_tile = DESELECT
-				#fire_cannon()
 				turn_pred = !turn_pred
 
 				
@@ -201,15 +200,15 @@ func fire_cannon():
 			tile = Vector2(tile.x - 1, tile.y)
 
 func end_game():
-	print("Game over!")
+	#wait a bit and restart the game
 	var t = Timer.new()
-	t.set_wait_time(4)
+	t.set_wait_time(3)
 	t.set_one_shot(true)
 	self.add_child(t)
 	t.start()
 	yield(t, "timeout")
 	t.queue_free()
-	get_tree().quit()
+	get_tree().change_scene("res://chessboard.tscn")
 
 func move(start, end):
 	var id = get_cellv(start)
