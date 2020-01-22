@@ -41,7 +41,7 @@ func _input(event):
 			else:
 				move(clicked_tile, new_tile)
 				clicked_tile = DESELECT
-				fire_cannon()
+				#fire_cannon()
 				turn_pred = !turn_pred
 
 				
@@ -202,6 +202,14 @@ func fire_cannon():
 
 func end_game():
 	print("Game over!")
+	var t = Timer.new()
+	t.set_wait_time(4)
+	t.set_one_shot(true)
+	self.add_child(t)
+	t.start()
+	yield(t, "timeout")
+	t.queue_free()
+	get_tree().quit()
 
 func move(start, end):
 	var id = get_cellv(start)
@@ -224,6 +232,7 @@ func move(start, end):
 		set_cellv(end, id)
 		rotate_cell(start, state2)
 		rotate_cell(end,state)
+		fire_cannon()
 	
 	elif id2 != -1:
 		clicked_tile = DESELECT
@@ -233,6 +242,7 @@ func move(start, end):
 		set_cellv(start,-1)
 		set_cellv(end,id)
 		rotate_cell(end,state)
+		fire_cannon()
 
 func analyze_orientation(x,y):
 	if is_cell_transposed(x,y) and is_cell_x_flipped(x,y):
