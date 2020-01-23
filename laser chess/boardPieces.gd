@@ -57,6 +57,9 @@ func _input(event):
 			clicked_tile = DESELECT
 			fire_cannon()
 			turn_pred = !turn_pred
+			
+	if event is InputEventKey and event.pressed and event.scancode == KEY_ESCAPE:
+		get_tree().change_scene("res://MainMenu.tscn")
 
 
 func fire_cannon():
@@ -205,7 +208,7 @@ func end_game():
 	t.start()
 	yield(t, "timeout")
 	t.queue_free()
-	get_tree().change_scene("res://chessboard.tscn")
+	get_tree().change_scene("res://MainMenu.tscn")
 
 func move(start, end):
 	var id = get_cellv(start)
