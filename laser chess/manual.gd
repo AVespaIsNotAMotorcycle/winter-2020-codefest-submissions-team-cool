@@ -17,3 +17,8 @@ func _on_whitebackground_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		get_tree().change_scene("res://MainMenu.tscn")
 
+
+
+func _on_text_gui_input(event):
+	if event is InputEventMouseButton and event.pressed:
+		get_tree().change_scene("res://MainMenu.tscn")
