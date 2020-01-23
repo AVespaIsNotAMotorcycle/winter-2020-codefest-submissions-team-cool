@@ -186,9 +186,6 @@ func fire_cannon():
 		#if nothing was destroyed, move laser to next tile
 		select.set_cellv(tile,-1)
 		
-		print(tile)
-		print(direction)
-		
 		
 		if direction == 0:
 			tile = Vector2(tile.x, tile.y - 1)
