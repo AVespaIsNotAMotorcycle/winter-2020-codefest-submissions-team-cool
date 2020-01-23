@@ -15,7 +15,7 @@
 - As attendance is highly important, if you checked the above box but only some members will be attending, please indicate the number here: ___
 
 ### Game Info
-To play, download and run the Laser Chess.exe (or the Laser Chess.dmg for Mac)
+To play, download and run the Laser Chess.exe (or the Laser Chess.dmg for Mac) and the Laser Chess.pck file.
 
 # General Info
 ## Theme: Create a Passion Project - Make something you've always wanted to build!
