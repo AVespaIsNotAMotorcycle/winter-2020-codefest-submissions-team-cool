@@ -14,6 +14,9 @@
 - [X] We plan to attend the final event on 1/31 at Google (time TBD)
 - As attendance is highly important, if you checked the above box but only some members will be attending, please indicate the number here: ___
 
+### Game Info
+To play, download and run the Laser Chess.exe (or the Laser Chess.dmg for Mac)
+
 # General Info
 ## Theme: Create a Passion Project - Make something you've always wanted to build!
 Think of something you've always wanted to make and bring to life, and do it! To make it easier for our judges and to have some form of organization, all we ask is to try to keep it within one of these categories:
