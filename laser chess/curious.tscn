@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://chessboard.gd" type="Script" id=1]
 [ext_resource path="res://whitesquare.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://bluepieces/altdiagmirror.png" type="Texture" id=17]
 [ext_resource path="res://bluepieces/altblock.png" type="Texture" id=18]
 [ext_resource path="res://boardPieces.gd" type="Script" id=19]
+[ext_resource path="res://chessboad.wav" type="AudioStream" id=20]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
@@ -223,3 +224,7 @@ tile_set = SubResource( 4 )
 format = 1
 tile_data = PoolIntArray( 0, 1610612742, 0, 4, 1610612745, 0, 5, 5, 0, 6, 1610612745, 0, 7, 8, 0, 131075, 2, 0, 131078, -1610612729, 0, 196608, -1610612729, 0, 196609, -1073741822, 0, 196612, 1610612738, 0, 196613, 8, 0, 196616, 1610612743, 0, 196617, 2, 0, 262144, 1610612743, 0, 262145, 2, 0, 262148, 1610612739, 0, 262149, 7, 0, 262152, -1610612729, 0, 262153, -1073741822, 0, 327683, -1073741822, 0, 327686, 1610612743, 0, 458754, 3, 0, 458755, 4, 0, 458756, 0, 0, 458757, 4, 0, 458761, 536870913, 0 )
 script = ExtResource( 19 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+autoplay = true
