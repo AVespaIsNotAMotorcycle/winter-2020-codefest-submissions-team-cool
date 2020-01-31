@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://VBoxContainer.gd" type="Script" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://author.png" type="Texture" id=10]
 [ext_resource path="res://manual.png" type="Texture" id=11]
 [ext_resource path="res://boards and buttons/bace.png" type="Texture" id=12]
+[ext_resource path="res://LaserMenu.wav" type="AudioStream" id=13]
+[ext_resource path="res://AudioStreamPlayer2D.gd" type="Script" id=14]
 
 [node name="MainMenu" type="MarginContainer"]
 anchor_right = 1.0
@@ -123,6 +125,12 @@ margin_bottom = 425.0
 size_flags_stretch_ratio = 0.0
 texture = ExtResource( 12 )
 stretch_mode = 5
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 13 )
+volume_db = -9.204
+autoplay = true
+script = ExtResource( 14 )
 [connection signal="gui_input" from="HBoxContainer/VBoxContainer/MenuOptions/ace" to="HBoxContainer/VBoxContainer" method="_on_ace_gui_input"]
 [connection signal="gui_input" from="HBoxContainer/VBoxContainer/MenuOptions/curious" to="HBoxContainer/VBoxContainer" method="_on_curious_gui_input"]
 [connection signal="gui_input" from="HBoxContainer/VBoxContainer/MenuOptions/grail" to="HBoxContainer/VBoxContainer" method="_on_grail_gui_input"]

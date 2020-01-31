@@ -153,9 +153,7 @@ func fire_cannon():
 					direction = 180
 		
 		#logic for hitting diagonal mirror
-		#
-		#BUG: When two diagonal mirrors are adjdacent, the beam will go right through them
-		#
+
 		if id % 5 == 3:
 			if analyze_orientation(tile.x,tile.y) == 0 || analyze_orientation(tile.x,tile.y) == 180:
 				if direction == 0:
