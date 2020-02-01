@@ -1,5 +1,6 @@
 extends VBoxContainer
 
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -11,12 +12,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-
-
+	
 func _on_ace_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.pressed:
-			get_tree().change_scene("chessboard.tscn")
+			get_node("/root/MainMenu/Board")._load_chessboard("ace.txt")
+			#get_tree().change_scene("chessboard.tscn")
 	img.set_texture(load("res://boards and buttons/bace.png"))
 
 func _on_curious_gui_input(event):
