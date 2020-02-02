@@ -60,6 +60,8 @@ func _input(event):
 			
 	if event is InputEventKey and event.pressed and event.scancode == KEY_ESCAPE:
 		get_tree().change_scene("res://MainMenu.tscn")
+		get_node("../../MainMenuMusic").playing = true
+		get_node("../../Board/GameMusic").playing = false
 
 
 func fire_cannon():
@@ -84,7 +86,8 @@ func fire_cannon():
 		
 	#as long as the laser remains in bounds:
 	while (tile.x > -1 && tile.x < 10 && tile.y > -1 && tile.y < 8):
-		#check each next_tile and update direction. If it's a hit, destroy and return
+		#check each next_tile and update direction. 
+		#If it's a hit, destroy and return
 		var id = get_cellv(tile)
 		
 		#show the laser as it moves
@@ -110,7 +113,7 @@ func fire_cannon():
 			select.set_cellv(tile,-1)
 			break
 		
-		#logic for hitting triangular mirror
+		#logic for hitting triangular mirror (deflector)
 		if id % 5 == 2:
 			if analyze_orientation(tile.x,tile.y)  == 0:
 				if direction == 0 || direction == 270:
@@ -151,6 +154,20 @@ func fire_cannon():
 					direction = 270
 				if direction == 90:
 					direction = 180
+					
+			#This was supposed to be a better version of the deflector logic but it doesn't work
+	#		if id % 5 == 2:
+	#			if (direction - analyze_orientation(tile.x,tile.y)) % 360 == 0 || (direction - analyze_orientation(tile.x,tile.y) ) % 360 == 270:
+	#				set_cellv(tile, -1)
+	#				select.set_cellv(tile,-1)
+	#				break
+	#
+	#			elif (direction - analyze_orientation(tile.x,tile.y)) % 360 == 90:
+	#				direction = analyze_orientation(tile.x,tile.y)
+	#				print(direction)
+	#
+	#			elif (direction - analyze_orientation(tile.x,tile.y)) % 360 == 180:
+	#				direction = (analyze_orientation(tile.x,tile.y) - 90) % 360
 		
 		#logic for hitting diagonal mirror
 
