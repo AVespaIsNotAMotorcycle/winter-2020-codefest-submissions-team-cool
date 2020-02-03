@@ -306,7 +306,8 @@ func init_rotate_cell(cell, deg):
 
 func vdistance(start, end):
 	return Vector2(abs(end.x-start.x),abs(end.y-start.y))
-	
+
+#Change the sidebar to reflect whose turn it is
 func update_sidebar():
 	if (turn_pred):
 		sidebar_obj.get_node("./redTeamMarker").show()
