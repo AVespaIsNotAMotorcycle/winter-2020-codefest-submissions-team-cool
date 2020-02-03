@@ -6,7 +6,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	OS.set_window_size(Vector2(640, 512))
+	OS.set_window_size(Vector2(840, 512))
 	_save_board_state(get_tree().get_current_scene().get_name() + ".txt")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,7 +41,6 @@ func _load_chessboard(boardfile):
 					celly += 1
 			else: #Rotate pieces
 				tilemap.init_rotate_cell(Vector2(cellx,celly - 8), int(number))
-				print(number)
 				number = ""
 				cellx += 1
 				if cellx == 10:
@@ -51,7 +50,7 @@ func _load_chessboard(boardfile):
 	tilemap.update_dirty_quadrants()
 	var hbox = get_node("../HBoxContainer")
 	hbox.hide()
-	OS.set_window_size(Vector2(640, 512))
+	OS.set_window_size(Vector2(840, 512))
 	show()
 	
 #Read the position and rotation of each tile in a scene and save it to a corresponding .txt file

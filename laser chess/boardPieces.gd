@@ -4,11 +4,12 @@ var mouse_pos
 const DESELECT = Vector2(-1,-1)
 var clicked_tile = DESELECT #vector2 location of the clicked tile
 var selected_piece #ID in the tileset of the selected piece
-var turn_pred = true
-
+var turn_pred = true #True if it's RED's turn
+var sidebar_obj
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	sidebar_obj = get_node("../sidebar")
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -62,7 +63,8 @@ func _input(event):
 		get_tree().change_scene("res://MainMenu.tscn")
 		get_node("../../MainMenuMusic").playing = true
 		get_node("../../Board/GameMusic").playing = false
-
+	
+	update_sidebar()
 
 func fire_cannon():
 	var direction
@@ -304,3 +306,12 @@ func init_rotate_cell(cell, deg):
 
 func vdistance(start, end):
 	return Vector2(abs(end.x-start.x),abs(end.y-start.y))
+	
+func update_sidebar():
+	if (turn_pred):
+		sidebar_obj.get_node("./redTeamMarker").show()
+		sidebar_obj.get_node("./blueTeamMarker").hide()
+	else:
+		sidebar_obj.get_node("./redTeamMarker").hide()
+		sidebar_obj.get_node("./blueTeamMarker").show()
+	pass
