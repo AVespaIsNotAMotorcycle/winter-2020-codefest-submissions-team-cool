@@ -40,7 +40,7 @@ func _load_chessboard(boardfile):
 					cellx = 0
 					celly += 1
 			else: #Rotate pieces
-				tilemap.rotate_cell(Vector2(cellx,celly - 8), int(number))
+				tilemap.init_rotate_cell(Vector2(cellx,celly - 8), int(number))
 				print(number)
 				number = ""
 				cellx += 1

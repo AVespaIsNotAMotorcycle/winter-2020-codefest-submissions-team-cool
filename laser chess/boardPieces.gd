@@ -289,6 +289,18 @@ func rotate_cell(cell, deg):
 		set_cellv(cell, get_cellv(cell), true, true, false)
 	if targ == 270:
 		set_cellv(cell, get_cellv(cell), false, true, true)
+		
+#Additional rotate cell function, called only when the board is initialized. Allows the rotations of the cannons to be defined by file.
+func init_rotate_cell(cell, deg):
+	var targ = (analyze_orientation(cell.x,cell.y) + deg) % 360
+	if targ == 0:
+		set_cellv(cell, get_cellv(cell), false, false, false)
+	if targ == 90:
+		set_cellv(cell, get_cellv(cell), true, false, true)
+	if targ == 180:
+		set_cellv(cell, get_cellv(cell), true, true, false)
+	if targ == 270:
+		set_cellv(cell, get_cellv(cell), false, true, true)
 
 func vdistance(start, end):
 	return Vector2(abs(end.x-start.x),abs(end.y-start.y))
