@@ -35,7 +35,7 @@ func _input(event):
 		else: #if a square is already selected
 			var new_tile = world_to_map(mouse_pos)
 			var dist = vdistance(clicked_tile, new_tile)
-			if dist.x > 1 || dist.y > 1:
+			if (dist.x > 1 || dist.y > 1) || clicked_tile.x > 8:
 				clicked_tile = DESELECT #deselect it
 			elif dist == Vector2(0,0):
 				clicked_tile = DESELECT
